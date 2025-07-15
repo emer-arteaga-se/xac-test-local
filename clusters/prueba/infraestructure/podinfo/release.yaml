@@ -1,18 +1,18 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: podinfo
   namespace: infraestructure
 spec:
-  interval: 5m
+  interval: 10m
   chart:
     spec:
-      chart: podinfo
-      version: '4.0.1'
+      chart: <name|path>
+      version: '4.0.x'
       sourceRef:
-        kind: HelmRepository
+        kind: <HelmRepository|GitRepository|Bucket>
         name: podinfo
         namespace: flux-system
-      interval: 1m
+      interval: 10m
   values:
-    replicaCount: 3
+    replicaCount: 2

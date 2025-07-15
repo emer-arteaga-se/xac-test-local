@@ -1,11 +1,16 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImagePolicy
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
 metadata:
   name: redis
-  namespace: flux-system
+  namespace: infraestructure
 spec:
-  imageRepositoryRef:
-    name: redis
-  policy:
-    semver:
-      range: 6.0.x
+  releaseName: redis
+  interval: 5m
+  chart:
+    spec:
+      chart: redis
+      version: 21.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami-oci
+        namespace: flux-system
